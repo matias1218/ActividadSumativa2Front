@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+  
+        
+        <div class="d-flex justify-content-between">
+            <!-- <span><button (click)="nuevoItem()" class="btn btn-success">Nuevo Producto</button></span>
+            <span *ngIf="mostrarFormulario"><button (click)="cancelar()" class="btn btn-danger">Cancelar</button></span> -->
+        </div>
+        <br>
+        <div>
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Opción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                  <tr *ngFor="let producto of productos">
+                    <td scope="row">{{producto.codigo}}</td>
+                    <td scope="row">{{producto.nombre}}</td>
+                    <td scope="row">{{producto.precio}}</td>
+                    <td scope="row">{{producto.stock}}</td>
+                    <td scope="row">
+                      <button class="btn btn-warning mx-2" (click)="openEdit(producto)">Editar</button>
+                      <button class="btn btn-danger" (click)="openDelete(producto)">Borrar</button>
+                    </td>
+                  </tr>
+
+                  
+                </tbody>
+                
+              </table>
+              <span class="d-flex justify-content-center" *ngIf="productos?.length == 0"><strong>SIN DATOS</strong></span>
+        </div>
+      </div>
+      <!-- <div class="col-md-6" *ngIf="mostrarFormulario">
+  
+        <h3>Nuevo producto</h3>
+        <hr>
+        <app-formulario-productos (emisor)="receptor($event)"></app-formulario-productos>
+      </div> -->
+    </div>
+</div>
+

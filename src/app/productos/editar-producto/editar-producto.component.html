@@ -1,0 +1,33 @@
+<form [formGroup]="formularioProductoEditar" class="formulario p-3 shadow">
+
+    <div class="d-flex justify-content-between ">
+        <h4>Editar Producto</h4>
+        <button data-toggle="tooltip" data-placement="top" title="Cerrar" class="btn" (click)="cancelar()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+          </svg></button>
+        
+    </div>
+    <hr>
+    <div class="form-group pb-3">
+        <label class="control-label pb-1">Codigo</label>
+        <input type="text"  name="username" placeholder="Ingrese un codigo" class="form-control" required autofocus="autofocus" formControlName="codigo" disabled/>
+    </div>
+    <div class="form-group pb-3">
+        <label class="control-label pb-1" id="nombre" >Nombre</label>
+        <input type="text"   placeholder="Ingrese un nombre de producto" class="form-control" required autofocus="autofocus" formControlName="nombre"/>
+    </div>
+    <div class="form-group pb-3">
+        <label class="control-label pb-1">Precio</label>
+        <input type="text"   placeholder="Ingrese un precio" class="form-control" required autofocus="autofocus" formControlName="precio"/>
+    </div>
+    <div class="form-group pb-3">
+        <label class="control-label pb-1">Stock</label>
+        <input type="text"   placeholder="Ingrese el stock del producto" class="form-control" required autofocus="autofocus" formControlName="stock"/>
+    </div>
+    <div class="form-group">
+        <div class="row pt-3 mx-0">
+            <button type="submit" (click)="guardarEdicion()" class="btn btn-success btn-block">Actualizar</button>
+        </div>  
+    </div>
+</form>

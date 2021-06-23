@@ -7,4 +7,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'sumativa2';
+
+
+  vistaSelected = true;
+  
+  gestion(){
+    this.vistaSelected = true;
+    
+
+  }
+  tienda(){
+    this.vistaSelected = false;
+  }
 }

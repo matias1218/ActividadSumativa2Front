@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <h4 class="modal-title">Hi there!</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formularioProducto" >
+
+        <div class="form-group pb-3">
+            <label class="control-label pb-1">Codigo</label>
+            <input type="text"  name="username" placeholder="Ingrese un codigo" class="form-control" required autofocus="autofocus" formControlName="codigo" />
+        </div>
+        <div class="form-group pb-3">
+            <label class="control-label pb-1" id="nombre" >Nombre</label>
+            <input type="text"   placeholder="Ingrese un nombre de producto" class="form-control" required autofocus="autofocus" formControlName="nombre"/>
+        </div>
+        <div class="form-group pb-3">
+            <label class="control-label pb-1">Precio</label>
+            <input type="text"   placeholder="Ingrese un precio" class="form-control" required autofocus="autofocus" formControlName="precio"/>
+        </div>
+        <div class="form-group pb-3">
+            <label class="control-label pb-1">Stock</label>
+            <input type="text"   placeholder="Ingrese el stock del producto" class="form-control" required autofocus="autofocus" formControlName="stock"/>
+        </div>
+        <div class="form-group">
+            <div class="row pt-3 mx-0">
+                <button type="submit" (click)="guardar()" class="btn btn-success btn-block">Guardar</button>
+            </div>  
+        </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>

@@ -1,0 +1,172 @@
+
+
+
+<div class="container">
+    <!-- VISTA DE GESTION DE PRODUCTOS -->
+    <div class="row" *ngIf="vista">
+        <div class="col-md-6 ">
+            
+            <br>
+            <div class="d-flex justify-content-between fondo p-3 shadow">
+                <h3>Listado de Productos</h3>
+                <button class="btn mx-2" data-toggle="tooltip" data-placement="top" title="Agregar Producto" (click)="nuevoProducto()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                  </svg></button>
+                
+            </div>
+            <hr>
+            <!-- LISTA DE PRODUCTOS -->
+            <div class="fondo p-3 shadow">
+                <app-listar [productos]="productosVitrina" (emisorEdit)="receptorEdicionProductoLista($event)" (emisorDelete)="receptorBorrarProductoLista($event)"></app-listar>
+            </div>
+        </div>
+        <div class="col-md-6">
+            
+            <br>
+            <!-- FORMULARIO PARA AGREGAR UN PRODUCTO A LA VITRINA -->
+            <div *ngIf="setVisibleAddForm">
+                <app-formulario-producto (emisor)="receptorFormulario($event)" (dialog)="cancelDialog($event)"></app-formulario-producto>
+                
+            </div>
+
+            <!-- COMPONENTE PARA EDITAR UN PRODUCTO -->
+            <div *ngIf="setVisibleEditForm">
+                <app-editar-producto [producto]="auxProduct" (emisor)="receptorEdicionProductoForm($event)" (dialog)="cancelDialog($event)"></app-editar-producto>
+            </div>
+        </div>
+    </div>
+
+    <!-- VISTA DE COMPRA DE PRODUCTOS -->
+    <br>
+    <div class="row" *ngIf="!vista">
+        
+        <h4>Tienda</h4>
+            <hr>
+        <div class="col-md-8">
+            
+
+            <div class="card-hov" >
+                <ul class="list-group list-group-flush">
+                  <!-- lista de productos -->
+                  <li class="list-group-item" *ngFor="let producto of productosVitrina">
+                      <div class="container-fluid">
+                          <div class="row">
+                              <div class="col-md-3 d-flex align-items-stretch">
+                                  <div class="card" >
+                                    <div class="card-body">
+                                      <img class="card-img-top" src="https://falabella.scene7.com/is/image/FalabellaCO/4212149_1?wid=800&hei=800&qlt=70" alt="Card image cap">
+                                    </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-9">
+                                  <div class="card" >
+                                    <div class="card-body">
+                                      <h5 class="card-title" [id]="'producto'+producto.codigo">{{producto.nombre}}</h5>
+                                      <h6 class="card-subtitle mb-2 text-muted">Stock: {{producto.stock}} unidades</h6>
+                                      <p class="card-text">Codigo: {{producto.codigo}}</p>
+                                      <div class="container-fluid p-0">
+                                          <div class="row">
+                                              <div class="col-md-12">
+                                                  <strong><p style="text-align: right;" [id]="'precio'+producto.codigo">{{producto.precio}}$</p></strong>
+                                              </div>
+                                          </div>
+                                          <div class="row">
+                                              <div class="col-md-9">
+                                              </div>
+                                              <div class="col-md-3">
+                                                  <div class="input-group ">
+                                                        <div class="input-group-prepend">
+                                                          <button class="btn btn-outline-secondary"  type="button" (click)="quitar(producto)">-</button>
+                                                      </div>
+                                                      <input type="number"  class="form-control" disabled aria-describedby="basic-addon1" value="0" [id]="'valor'+producto.codigo" >
+                                                      <div class="input-group-prepend">
+                                                          <button class="btn btn-outline-secondary"  type="button" (click)="agregar(producto)">+</button>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CARRITO DE COMPRAS -->
+        <div class="col-md-4">
+            <!-- CARRITO DE COMPRAS -->
+            
+            <div class="card-hov" id="carrito" >
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <div class="card" >
+                      <div class="card-body">
+                        <h5 class="card-title">Carrito de compras</h5>
+                        <!-- FILA POR CADA PRODUCTO AGREGADO -->
+                            <div class="container px-0" id="canastaContainer">
+                                <div class="row" *ngFor="let producto of carrito"> 
+                                    <div class="col-md-7" id="canastaProductosNombre">
+                                        <p class="card-text mb-1" >{{producto.nombre}}</p>
+                                    </div>
+                                    <div class="col-md-5" id="canastaProductosPrecio">
+                                        <p class="card-text mb-1" style="text-align: right;" >{{producto.precio}}</p>
+                                    </div>
+                                </div>
+                             
+                            </div>
+                        <!-- SECCION DE PRECIO TOTAL -->
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <p class="card-text mb-1">IVA (19%)</p>
+                                    
+                                </div>
+                                <div class="col-md-5">
+                                    <p class="card-text mb-1" style="text-align: right;" id="subtotal">{{subTotalIVA}}$</p>
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <p class="card-text mb-1">Subtotal</p>
+                                    
+                                </div>
+                                <div class="col-md-5">
+                                    <p class="card-text mb-1" style="text-align: right;" id="subtotal">{{subtotal}}$</p>
+                                </div>
+                                
+                            </div>
+                        <!-- BOTON DE CONFIRMACION DE CARRITO -->
+                            <form >
+                                <input hidden type="hidden" />
+                                <div class="row pt-3">
+                                    <button type="button" class="btn btn-success btn-block">Pagar</button>
+                                </div>
+                            
+                            
+                            </form>
+                        
+                            
+                      </div>
+                    </div>
+                </li>
+              </ul>
+            </div>
+            
+        </div>
+        
+        
+
+    </div>
+</div>
+
+
+
+
+
+
+<!-- <button class="btn btn-lg btn-outline-primary" (click)="open()">Launch demo modal</button> -->

@@ -1,0 +1,22 @@
+.fit-image{
+    width: 100%;
+    object-fit: cover;
+    height: 250px; /* only if you want fixed height */
+    opacity: 0.5;
+}
+.centered {
+    
+    color: #181819;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.centered2 {
+    
+    color: #181819;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
